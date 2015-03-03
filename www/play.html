@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/play.css" />
+        <title>Play</title>
+    </head>
+    <body>
+        <div id="map">
+            <div id="map-canvas" class="bigmap"></div>
+            <div id="pano-canvas" class="bigmap"></div>
+            <div id="reportform" class="bigmap">
+                <input type="text" id="facility" placeholder="Digita tipo barriera/facility">
+                <button id="btnReport">Invia segnalazione</button>
+            </div>
+            <div id="upgradeform" class="bigmap">
+                <button id="btnBuyHealth">Compra 25 vita per 5 punti</button>
+                <button id="btnBuyPower">Compra potenziamento arma per 5 punti</button>
+            </div>
+        </div>
+        <div id="controls">
+                <button id="show-player-stats"><img src="img/button/Zombie.png" width="30px" id="status-image"></button>
+                <button><img src="icon.png" width="30px" id="health-image"></button>
+                <button><img src="icon.png" width="30px" id="gun-image"></button>
+                <button id="btnUpgradeForm"><img src="icon.png" width="30px"></button>
+                <button id="btnReportForm"><img src="img/button/Report.png" width="30px"></button>
+        </div>
+        <div id="blood" class="bigmap"></div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/lib/jquery-2.1.3.min.js"></script>
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=geometry&key=AIzaSyA9SMINFvkDhLF-MoP4YFzOn8q6YdyhIlU"></script>
+        <script type="text/javascript" src="https://apis.google.com/js/client.js"></script>
+        <script type="text/javascript" src="js/play.js"></script>
+        <script type="text/javascript" src="js/report.js"></script>
+    </body>
+</html> 
