@@ -82,7 +82,6 @@ function initialize() {
         disableDefaultUI: true,
         draggable: false,
         disableDoubleClickZoom: true,
-        streetView : panorama,
     };
     
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
