@@ -1,27 +1,5 @@
-var map, panorama, gpsTracker;
-var dirService;
+var map, gpsTracker;
 var playerMarker = null;
-var zombies = [];
-var timeSpent = 0;
-var totalMoves = 0;
-var playerBuffer = 180;
-var timeInt;
-var FPS = 5;
-var fpsInt = 1000/FPS;
-var zombieMoveDist = 0.00001;
-var zombieDistributionRange = 3800;
-var zombieAwareRadius = 500;
-var zombieAsleepRadius = 700;
-var zombieVisibleRadius = 150;
-var zombiesInVisibleRadius = false;
-var dieRadius = 5;
-var aniFinish;
-var aniAmt = 10;
-var povAniInt;
-var playerData;
-var isPaused = false;
-var healthPrice = 5;
-var powerPrice = 5;
 
 var app = {
     // Application Constructor
