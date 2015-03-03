@@ -86,7 +86,10 @@ function ReportControl(controlDiv, map) {
   // Chicago
   google.maps.event.addDomListener(reportControlButton, 'click', function() {
       var type = prompt("Che tipo di barriera è?", "Passaggio pedonale");
-      ReportFacility(playerMarker.getPosition(), type);
+      
+      if (type != null) {
+        ReportFacility(playerMarker.getPosition(), type);
+      }
   });
 
 }
