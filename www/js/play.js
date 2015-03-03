@@ -129,7 +129,7 @@ function initialize() {
         }, function() {
             alert("Nessuna posizione rilevata.");
         }, {
-            enableHighAccuracy: true, 
+            enableHighAccuracy: false, 
             maximumAge        : 30000, 
             timeout           : 27000
         });
