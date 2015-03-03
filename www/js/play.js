@@ -61,33 +61,30 @@ function ReportFacility(pos, type) {
  * @constructor
  */
 function ReportControl(controlDiv, map) {
-
-  // Set CSS for the control border
-  var controlUI = document.createElement('div');
-  controlUI.style.backgroundColor = '#fff';
-  controlUI.style.border = '2px solid #fff';
-  controlUI.style.borderRadius = '3px';
-  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
-  controlUI.style.cursor = 'pointer';
-  controlUI.style.marginBottom = '22px';
-  controlUI.style.textAlign = 'center';
-  controlUI.title = 'Clicca per inviare una segnalazione';
-  controlDiv.appendChild(controlUI);
-
-  // Set CSS for the control interior
-  var controlText = document.createElement('div');
-  controlText.style.color = 'rgb(25,25,25)';
-  controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
-  controlText.style.fontSize = '16px';
-  controlText.style.lineHeight = '38px';
-  controlText.style.paddingLeft = '5px';
-  controlText.style.paddingRight = '5px';
-  controlText.innerHTML = 'Segnala';
-  controlUI.appendChild(controlText);
+  // Set CSS for the control wrapper
+  var controlWrapper = document.createElement('div');
+  controlWrapper.style.backgroundColor = 'white';
+  controlWrapper.style.borderStyle = 'solid';
+  controlWrapper.style.borderColor = 'gray';
+  controlWrapper.style.borderWidth = '1px';
+  controlWrapper.style.cursor = 'pointer';
+  controlWrapper.style.textAlign = 'center';
+  controlWrapper.style.width = '64px'; 
+  controlWrapper.style.height = '64px';
+  controlDiv.appendChild(controlWrapper);
+  
+  var reportControlButton = document.createElement('div');
+  reportControlButton.style.width = '64px'; 
+  reportControlButton.style.height = '64px';
+  /* Change this to be the .png image you want to use */
+  reportControlButton.style.backgroundImage = 'url("img/button/Report.png")';
+  reportControlButton.style.backgroundSize = '64px 64px';
+  reportControlButton.style.backgroundRepeat = 'no-repeat';
+  controlWrapper.appendChild(reportControlButton);
 
   // Setup the click event listeners: simply set the map to
   // Chicago
-  google.maps.event.addDomListener(controlUI, 'click', function() {
+  google.maps.event.addDomListener(reportControlButton, 'click', function() {
       var type = prompt("Che tipo di barriera è?", "Passaggio pedonale");
       ReportFacility(playerMarker.getPosition(), type);
   });
@@ -117,7 +114,7 @@ function initialize() {
       var reportControl = new ReportControl(reportControlDiv, map);
       
   reportControlDiv.index = 1;
-  map.controls[google.maps.ControlPosition.BOTTOM_RIGHT].push(reportControlDiv);
+  map.controls[google.maps.ControlPosition.RIGHT].push(reportControlDiv);
 
 
 
