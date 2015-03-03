@@ -44,6 +44,57 @@ var app = {
     },
 };
 
+function ReportFacility(pos, type) {
+    $.ajax({
+        url: 'http://robotex.altervista.org/facility-zero/report.php',
+        data: { username: localStorage['username'], type: type, lat: pos.lat(), lng: pos.lng() },
+        jsonp: 'callback',
+        dataType: 'jsonp',
+    }).done(function( data ) {
+        alert('Messaggio del server: ' + data['message']);
+    });
+}
+
+/**
+ * The ReportControl adds a control to the map that recenters the map on Chicago.
+ * This constructor takes the control DIV as an argument.
+ * @constructor
+ */
+function ReportControl(controlDiv, map) {
+
+  // Set CSS for the control border
+  var controlUI = document.createElement('div');
+  controlUI.style.backgroundColor = '#fff';
+  controlUI.style.border = '2px solid #fff';
+  controlUI.style.borderRadius = '3px';
+  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+  controlUI.style.cursor = 'pointer';
+  controlUI.style.marginBottom = '22px';
+  controlUI.style.textAlign = 'center';
+  controlUI.title = 'Clicca per inviare una segnalazione';
+  controlDiv.appendChild(controlUI);
+
+  // Set CSS for the control interior
+  var controlText = document.createElement('div');
+  controlText.style.color = 'rgb(25,25,25)';
+  controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+  controlText.style.fontSize = '16px';
+  controlText.style.lineHeight = '38px';
+  controlText.style.paddingLeft = '5px';
+  controlText.style.paddingRight = '5px';
+  controlText.innerHTML = 'Segnala';
+  controlUI.appendChild(controlText);
+
+  // Setup the click event listeners: simply set the map to
+  // Chicago
+  google.maps.event.addDomListener(controlUI, 'click', function() {
+      var type = prompt("Che tipo di barriera è?", "Passaggio pedonale");
+      ReportFacility(playerMarker.getPosition(), type);
+  });
+
+}
+
+
 
 function initialize() {
 
@@ -57,6 +108,18 @@ function initialize() {
     };
     
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    
+    
+      // Create the DIV to hold the control and
+      // call the CenterControl() constructor passing
+      // in this DIV.
+      var reportControlDiv = document.createElement('div');
+      var reportControl = new ReportControl(reportControlDiv, map);
+      
+  reportControlDiv.index = 1;
+  map.controls[google.maps.ControlPosition.BOTTOM_RIGHT].push(reportControlDiv);
+
+
 
     // Try HTML5 geolocation
     if(navigator.geolocation) {
@@ -65,26 +128,19 @@ function initialize() {
 
             if (playerMarker === null)
             {
-                playerData = JSON.parse(localStorage['data']);
-                
                 var playerIcon = new google.maps.MarkerImage(
-                    playerData['sex'] == 'f' ? 'img/marker/player_female.png' : 'img/marker/player.png',
+                    localStorage['sex'] == 'f' ? 'img/marker/player_female.png' : 'img/marker/player.png',
                     null, /* size is determined at runtime */
                     null, /* origin is 0,0 */
                     null, /* anchor is bottom center of the scaled image */
                     new google.maps.Size(62, 68)
                 );  
+                
                 // Place player's marker
                 playerMarker = new google.maps.Marker({
                   position: pos,
                   map: map,
                   icon: playerIcon,
-                });
-                
-                playerMarker.circle = new google.maps.Circle({
-                    map: map,
-                    center: playerMarker.getPosition(),
-                    radius: zombieVisibleRadius,
                 });
                 
                 map.bindTo('center', playerMarker, 'position');
@@ -104,17 +160,6 @@ function initialize() {
         alert('Il tuo browser non supporta la geolocalizzazione!');
     }
 }
-
-function toggle_visibility(id) {
-   var e = document.getElementById(id);
-   isPaused = !isPaused;
-   if(e.style.display == 'block')
-      e.style.display = 'none';
-   else
-      e.style.display = 'block';
-}
-
-
 
 ///////////
 $( initialize );
