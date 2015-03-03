@@ -41,22 +41,22 @@ function ReportFacility(pos, type) {
 function ReportControl(controlDiv, map) {
   // Set CSS for the control wrapper
   var controlWrapper = document.createElement('div');
-  controlWrapper.style.backgroundColor = 'white';
+  controlWrapper.style.backgroundColor = 'yellow';
   controlWrapper.style.borderStyle = 'solid';
   controlWrapper.style.borderColor = 'gray';
   controlWrapper.style.borderWidth = '1px';
   controlWrapper.style.cursor = 'pointer';
   controlWrapper.style.textAlign = 'center';
-  controlWrapper.style.width = '64px'; 
-  controlWrapper.style.height = '64px';
+  controlWrapper.style.width = '128px'; 
+  controlWrapper.style.height = '128px';
   controlDiv.appendChild(controlWrapper);
   
   var reportControlButton = document.createElement('div');
-  reportControlButton.style.width = '64px'; 
-  reportControlButton.style.height = '64px';
+  reportControlButton.style.width = '128px'; 
+  reportControlButton.style.height = '128px';
   /* Change this to be the .png image you want to use */
   reportControlButton.style.backgroundImage = 'url("img/button/Report.png")';
-  reportControlButton.style.backgroundSize = '64px 64px';
+  reportControlButton.style.backgroundSize = '128px 128px';
   reportControlButton.style.backgroundRepeat = 'no-repeat';
   controlWrapper.appendChild(reportControlButton);
 
@@ -80,8 +80,8 @@ function initialize() {
         zoom: 16,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         disableDefaultUI: true,
-        draggable: false,
-        disableDoubleClickZoom: true,
+        //draggable: false,
+        //disableDoubleClickZoom: true,
     };
     
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
@@ -120,7 +120,7 @@ function initialize() {
                   icon: playerIcon,
                 });
                 
-                map.bindTo('center', playerMarker, 'position');
+                //map.bindTo('center', playerMarker, 'position');
 
                 map.setCenter(pos);
             }
