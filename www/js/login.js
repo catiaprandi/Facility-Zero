@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    //$("[name='sex']").bootstrapSwitch();
+    
     $('#login-form').submit(function( e ) {
         e.preventDefault();
         var user = $('#username').val();
