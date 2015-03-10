@@ -79,7 +79,7 @@ function LoadStats(showAlert) {
             else if (data['reports_count'] == 5)
                 alert('Attività superata! Continua a fare report per ottenere badges! Il primo in classifica ne ha fatti ' + data['best_reports_count']);
             else
-                alert('La tua posizione in classifica è: ' + data['ranking'] + ' '! );
+                alert('La tua posizione in classifica è: ' + data['ranking'] + ' Continua a fare report per ottenere badges! Il primo in classifica ne ha fatti ' + data['best_reports_count'] );
         }
     });
 }
