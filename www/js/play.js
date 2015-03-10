@@ -25,7 +25,7 @@ var app = {
 
 function ReportFacility(pos, type) {
     $.ajax({
-        url: 'http://http://137.204.74.226/mPass_gamification/report2.php',
+        url: 'http://137.204.74.226/mPass_gamification/report2.php',
         data: { username: localStorage['username'], type: type, lat: pos.lat(), lng: pos.lng() },
         jsonp: 'callback',
         dataType: 'jsonp',
