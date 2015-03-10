@@ -132,7 +132,7 @@ function ReportControl(controlDiv, map) {
   
   google.maps.event.addDomListener(statsControlButton, 'click', function() {
       LoadStats(false);
-      alert('Reports inviati: ' + localStorage['reports_count'] +'\nUtenti che hanno passato l\attività: ' + localStorage['passed_users_count'] + '\nMaggior numero di report da un utente: ' + localStorage['best_reports_count'] + '\nPosizione in classifica globale: ' + localStorage['ranking']);
+      alert('Reports inviati: ' + localStorage['reports_count'] +'\nUtenti che hanno passato l\'attività: ' + localStorage['passed_users_count'] + '\nMaggior numero di report da un utente: ' + localStorage['best_reports_count'] + '\nPosizione in classifica globale: ' + localStorage['ranking']);
   });
 }
 
