@@ -25,7 +25,7 @@ var app = {
 
 function ReportFacility(pos, type) {
     $.ajax({
-        url: 'http://robotex.altervista.org/facility-zero/report2.php',
+        url: 'http://http://137.204.74.226/mPass_gamification/report2.php',
         data: { username: localStorage['username'], type: type, lat: pos.lat(), lng: pos.lng() },
         jsonp: 'callback',
         dataType: 'jsonp',
@@ -37,7 +37,7 @@ function ReportFacility(pos, type) {
 
 function LoadStats(showAlert = false) {
     $.ajax({
-        url: 'http://robotex.altervista.org/facility-zero/stats.php',
+        url: 'http://137.204.74.226/mPass_gamification/stats.php',
         data: { username: localStorage['username'] },
         jsonp: 'callback',
         dataType: 'jsonp',
