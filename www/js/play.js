@@ -77,9 +77,9 @@ function LoadStats(showAlert) {
             if(data['reports_count'] < 5)
                 alert('Ti mancano ancora ' + (5 - data['reports_count']) + ' report per superare l\'attività. Già ' + data['passed_users_count'] + ' utenti hanno superato l\'attività');
             else if (data['reports_count'] == 5)
-                alert('Attività superata! Continua a fare report per ottenere badget! Il primo in classifica ne ha fatti ' + data['best_reports_count']);
+                alert('Attività superata! Continua a fare report per ottenere badges! Il primo in classifica ne ha fatti ' + data['best_reports_count']);
             else
-                alert('La tua posizione in classifica è: ' + data['ranking']);
+                alert('La tua posizione in classifica è: ' + data['ranking'] + ' '! );
         }
     });
 }
