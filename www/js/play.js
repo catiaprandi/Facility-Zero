@@ -138,7 +138,6 @@ function ReportControl(controlDiv, map) {
 function initialize() {
 
 
-alert("inizio");
     var mapOptions = {
         zoom: 16,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -161,7 +160,7 @@ alert("inizio");
 
 
     LoadStats();
-    alert("provo ad ottenere la posizione\n");
+
 
     // Try HTML5 geolocation
     if(navigator.geolocation) {
@@ -192,13 +191,11 @@ alert("inizio");
                 map.setCenter(pos);
             }
             playerMarker.setPosition(pos);
-        /*}, function(error) {
+        }, function(error) {
             if (error.code == error.PERMISSION_DENIED)
                 console.log("Non hai abilitato i permessi!");
             else
-                alert("Nessuna posizione rilevata.\n" + "[" + error.code + "] " + error.message);*/
-          }, function() {
-                alert("Nessuna posizione rilevata.");
+                alert("Nessuna posizione rilevata.\n" + "[" + error.code + "] " + error.message);
         }, {
             enableHighAccuracy: false, 
             maximumAge        : 30000, 
