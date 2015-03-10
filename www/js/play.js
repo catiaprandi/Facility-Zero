@@ -1,5 +1,6 @@
 var map, gpsTracker;
 var playerMarker = null;
+var statsControlButton;
 
 var app = {
     // Application Constructor
@@ -24,14 +25,62 @@ var app = {
 
 function ReportFacility(pos, type) {
     $.ajax({
-        url: 'http://robotex.altervista.org/facility-zero/report.php',
+        url: 'http://robotex.altervista.org/facility-zero/report2.php',
         data: { username: localStorage['username'], type: type, lat: pos.lat(), lng: pos.lng() },
         jsonp: 'callback',
         dataType: 'jsonp',
     }).done(function( data ) {
         alert('Messaggio del server: ' + data['message']);
+        LoadStats(true);
     });
 }
+
+function LoadStats(showAlert = false) {
+    $.ajax({
+        url: 'http://robotex.altervista.org/facility-zero/stats.php',
+        data: { username: localStorage['username'] },
+        jsonp: 'callback',
+        dataType: 'jsonp',
+    }).done(function( data ) {
+        localStorage['reports_count'] = data['reports_count'];
+        localStorage['passed_users_count'] = data['passed_users_count'];
+        localStorage['best_reports_count'] = data['best_reports_count'];
+        localStorage['ranking'] = data['ranking'];
+        
+        if (localStorage['sex'] == 'm') {
+            if(data['reports_count'] < 5)
+                statsControlButton.style.backgroundImage = 'url("img/button/badge/male_default.png")';
+            else if(data['reports_count'] >= 5 && data['reports_count'] < 6)
+                statsControlButton.style.backgroundImage = 'url("img/button/badge/male_5report.png")';
+            else if(data['reports_count'] >= 6 && data['reports_count'] < 8)
+                statsControlButton.style.backgroundImage = 'url("img/button/badge/male_6report.png")';
+            else if(data['reports_count'] >= 8 && data['reports_count'] < 10)
+                statsControlButton.style.backgroundImage = 'url("img/button/badge/male_8report.png")';
+            else if(data['reports_count'] >= 10)
+                statsControlButton.style.backgroundImage = 'url("img/button/badge/male_10report.png")';
+        } else {
+            if(data['reports_count'] < 5)
+                statsControlButton.style.backgroundImage = 'url("img/button/badge/female_default.png")';
+            else if(data['reports_count'] >= 5 && data['reports_count'] < 6)
+                statsControlButton.style.backgroundImage = 'url("img/button/badge/female_5report.png")';
+            else if(data['reports_count'] >= 6 && data['reports_count'] < 8)
+                statsControlButton.style.backgroundImage = 'url("img/button/badge/female_6report.png")';
+            else if(data['reports_count'] >= 8 && data['reports_count'] < 10)
+                statsControlButton.style.backgroundImage = 'url("img/button/badge/female_8report.png")';
+            else if(data['reports_count'] >= 10)
+                statsControlButton.style.backgroundImage = 'url("img/button/badge/female_10report.png")';
+        }
+        if (showAlert) {
+            if(data['reports_count'] < 5)
+                alert('Ti mancano ancora ' + (5 - data['reports_count']) + ' report per superare l\'attività. Già ' + data['passed_users_count'] + ' utenti hanno superato l\'attività');
+            else if (data['reports_count'] == 5)
+                alert('Attività superata! Continua a fare report per ottenere badget! Il primo in classifica ne ha fatti ' + data['best_reports_count']);
+            else
+                alert('La tua posizione in classifica è: ' + data['ranking']);
+        }
+    });
+}
+
 
 /**
  * The ReportControl adds a control to the map that recenters the map on Chicago.
@@ -48,7 +97,7 @@ function ReportControl(controlDiv, map) {
   controlWrapper.style.cursor = 'pointer';
   controlWrapper.style.textAlign = 'center';
   controlWrapper.style.width = '128px'; 
-  controlWrapper.style.height = '128px';
+  controlWrapper.style.height = '256px';
   controlDiv.appendChild(controlWrapper);
   
   var reportControlButton = document.createElement('div');
@@ -59,9 +108,17 @@ function ReportControl(controlDiv, map) {
   reportControlButton.style.backgroundSize = '128px 128px';
   reportControlButton.style.backgroundRepeat = 'no-repeat';
   controlWrapper.appendChild(reportControlButton);
+  
+  statsControlButton = document.createElement('div');
+  statsControlButton.style.width = '128px'; 
+  statsControlButton.style.height = '128px';
+  /* Change this to be the .png image you want to use */
+  statsControlButton.style.backgroundImage = 'url("img/button/heart_0.png")';
+  statsControlButton.style.backgroundSize = '128px 128px';
+  statsControlButton.style.backgroundRepeat = 'no-repeat';
+  controlWrapper.appendChild(statsControlButton);
 
-  // Setup the click event listeners: simply set the map to
-  // Chicago
+  // Setup the click event listeners
   google.maps.event.addDomListener(reportControlButton, 'click', function() {
       var type = prompt("Che tipo di barriera è?", "Passaggio pedonale");
       
@@ -69,7 +126,11 @@ function ReportControl(controlDiv, map) {
         ReportFacility(playerMarker.getPosition(), type);
       }
   });
-
+  
+  google.maps.event.addDomListener(statsControlButton, 'click', function() {
+      LoadStats(false);
+      alert('Reports inviati: ' + localStorage['reports_count'] +'\nUtenti che hanno passato l\attività: ' + localStorage['passed_users_count'] + '\nMaggior numero di report da un utente: ' + localStorage['best_reports_count'] + '\nPosizione in classifica globale: ' + localStorage['ranking']);
+  });
 }
 
 
@@ -96,6 +157,8 @@ function initialize() {
   reportControlDiv.index = 1;
   map.controls[google.maps.ControlPosition.RIGHT].push(reportControlDiv);
 
+
+    LoadStats();
 
 
     // Try HTML5 geolocation
