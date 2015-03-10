@@ -159,14 +159,14 @@ function initialize() {
 
 
     LoadStats();
-
+    alert("provo ad ottenere la posizione\n");
 
     // Try HTML5 geolocation
     if(navigator.geolocation) {
         gpsTracker = navigator.geolocation.watchPosition(function(position) {
-        alert("cerco di ottenere la pozione\n");
+
             var pos = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-        alert("posizione ottenuta\n");
+
 
             if (playerMarker === null)
             {
