@@ -190,7 +190,7 @@ function initialize() {
             playerMarker.setPosition(pos);
         }, function(error) {
             if (error.code == error.PERMISSION_DENIED)
-                console.log("Non hai abilitato i permessi!");
+                alert("Non hai abilitato i permessi!");
             else
                 alert("Nessuna posizione rilevata.\n" + "[" + error.code + "] " + error.message);
         }, {
