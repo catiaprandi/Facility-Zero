@@ -35,7 +35,10 @@ function ReportFacility(pos, type) {
     });
 }
 
-function LoadStats(showAlert = false) {
+function LoadStats(showAlert) {
+    if (showAlert === undefined) {
+        showAlert = false;
+    }
     $.ajax({
         url: 'http://robotex.altervista.org/facility-zero/stats.php',
         data: { username: localStorage['username'] },
