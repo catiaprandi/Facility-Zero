@@ -137,6 +137,8 @@ function ReportControl(controlDiv, map) {
 
 function initialize() {
 
+
+alert("inizio");
     var mapOptions = {
         zoom: 16,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
