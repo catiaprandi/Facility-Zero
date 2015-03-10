@@ -35,7 +35,10 @@ function ReportFacility(pos, type) {
     });
 }
 
-function LoadStats(showAlert = false) {
+function LoadStats(showAlert) {
+    if (showAlert === undefined) {
+        showAlert = false;
+    }
     $.ajax({
         url: 'http://137.204.74.226/mPass_gamification/stats.php',
         data: { username: localStorage['username'] },
@@ -193,7 +196,7 @@ function initialize() {
             playerMarker.setPosition(pos);
         }, function(error) {
             if (error.code == error.PERMISSION_DENIED)
-                console.log("Non hai abilitato i permessi!");
+                alert("Non hai abilitato i permessi!");
             else
                 alert("Nessuna posizione rilevata.\n" + "[" + error.code + "] " + error.message);
         }, {
