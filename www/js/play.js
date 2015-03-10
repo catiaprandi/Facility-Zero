@@ -192,11 +192,13 @@ alert("inizio");
                 map.setCenter(pos);
             }
             playerMarker.setPosition(pos);
-        }, function(error) {
+        /*}, function(error) {
             if (error.code == error.PERMISSION_DENIED)
                 console.log("Non hai abilitato i permessi!");
             else
-                alert("Nessuna posizione rilevata.\n" + "[" + error.code + "] " + error.message);
+                alert("Nessuna posizione rilevata.\n" + "[" + error.code + "] " + error.message);*/
+          }, function() {
+                alert("Nessuna posizione rilevata.");
         }, {
             enableHighAccuracy: false, 
             maximumAge        : 30000, 
