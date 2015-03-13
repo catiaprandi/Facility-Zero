@@ -53,25 +53,37 @@ function LoadStats(showAlert) {
         if (localStorage['sex'] == 'm') {
             if(data['reports_count'] < 5)
                 statsControlButton.style.backgroundImage = 'url("img/button/badge/male_default.png")';
+            else if(data['ranking'] == 1)
+                statsControlButton.style.backgroundImage = 'url("img/button/badge/male_1_classifica.png")';
             else if(data['reports_count'] >= 5 && data['reports_count'] < 6)
                 statsControlButton.style.backgroundImage = 'url("img/button/badge/male_5report.png")';
             else if(data['reports_count'] >= 6 && data['reports_count'] < 8)
                 statsControlButton.style.backgroundImage = 'url("img/button/badge/male_6report.png")';
             else if(data['reports_count'] >= 8 && data['reports_count'] < 10)
                 statsControlButton.style.backgroundImage = 'url("img/button/badge/male_8report.png")';
-            else if(data['reports_count'] >= 10)
+            else if(data['reports_count'] >= 15 && data['reports_count'] < 20)
+                statsControlButton.style.backgroundImage = 'url("img/button/badge/male_15report.png")';
+            else if(data['reports_count'] >= 10 && data['reports_count'] < 15)
                 statsControlButton.style.backgroundImage = 'url("img/button/badge/male_10report.png")';
+            else
+                statsControlButton.style.backgroundImage = 'url("img/button/badge/male_20report.png")';
         } else {
             if(data['reports_count'] < 5)
                 statsControlButton.style.backgroundImage = 'url("img/button/badge/female_default.png")';
+            else if(data['ranking'] == 1)
+                statsControlButton.style.backgroundImage = 'url("img/button/badge/female_1_classifica.png")';
             else if(data['reports_count'] >= 5 && data['reports_count'] < 6)
                 statsControlButton.style.backgroundImage = 'url("img/button/badge/female_5report.png")';
             else if(data['reports_count'] >= 6 && data['reports_count'] < 8)
                 statsControlButton.style.backgroundImage = 'url("img/button/badge/female_6report.png")';
             else if(data['reports_count'] >= 8 && data['reports_count'] < 10)
                 statsControlButton.style.backgroundImage = 'url("img/button/badge/female_8report.png")';
-            else if(data['reports_count'] >= 10)
+            else if(data['reports_count'] >= 15 && data['reports_count'] < 20)
+                 statsControlButton.style.backgroundImage = 'url("img/button/badge/female_15report.png")';
+            else if(data['reports_count'] >= 10 && data['reports_count'] < 15)
                 statsControlButton.style.backgroundImage = 'url("img/button/badge/female_10report.png")';
+            else
+                statsControlButton.style.backgroundImage = 'url("img/button/badge/female_20report.png")';
         }
         if (showAlert) {
             if(data['reports_count'] < 5)
