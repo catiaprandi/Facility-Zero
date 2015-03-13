@@ -65,8 +65,10 @@ function LoadStats(showAlert) {
                 statsControlButton.style.backgroundImage = 'url("img/button/badge/male_15report.png")';
             else if(data['reports_count'] >= 10 && data['reports_count'] < 15)
                 statsControlButton.style.backgroundImage = 'url("img/button/badge/male_10report.png")';
-            else
+            else if(data['reports_count'] >= 20 && data['reports_count'] < 25)
                 statsControlButton.style.backgroundImage = 'url("img/button/badge/male_20report.png")';
+            else
+                statsControlButton.style.backgroundImage = 'url("img/button/badge/male_25report.png")';
         } else {
             if(data['reports_count'] < 5)
                 statsControlButton.style.backgroundImage = 'url("img/button/badge/female_default.png")';
@@ -82,8 +84,10 @@ function LoadStats(showAlert) {
                  statsControlButton.style.backgroundImage = 'url("img/button/badge/female_15report.png")';
             else if(data['reports_count'] >= 10 && data['reports_count'] < 15)
                 statsControlButton.style.backgroundImage = 'url("img/button/badge/female_10report.png")';
-            else
+            else if(data['reports_count'] >= 20 && data['reports_count'] < 25)
                 statsControlButton.style.backgroundImage = 'url("img/button/badge/female_20report.png")';
+            else
+                statsControlButton.style.backgroundImage = 'url("img/button/badge/female_25report.png")';
         }
         if (showAlert) {
             if(data['reports_count'] < 5)
